@@ -1,3 +1,4 @@
 const PORT = 5000;
+const SECRET = "somesecretsecret";
 
-module.exports = { PORT };
+module.exports = { PORT, SECRET };
