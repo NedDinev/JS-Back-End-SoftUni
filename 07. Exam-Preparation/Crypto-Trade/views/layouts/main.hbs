@@ -16,13 +16,24 @@
           <li><a href="/">Home</a></li>
           <li><a href="#">All Crypto</a></li>
           <li><a href="#">Search</a></li>
-          <li><a href="#">Create Offer</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Register</a></li>
-          <li><a href="/logout">Logout</a></li>
+          {{#if isAuthenticated}}
+            <li><a href="#">Create Offer</a></li>
+            <li><a href="/logout">Logout</a></li>
+          {{else}}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          {{/if}}
+
         </ul>
       </nav>
     </header>
+    {{#if error}}
+      <div>
+        <div class="errorContainer">
+          <p>{{error}}</p>
+        </div>
+      </div>
+    {{/if}}
     {{{body}}}
     <footer>
       <p>Back-End 2022</p>
