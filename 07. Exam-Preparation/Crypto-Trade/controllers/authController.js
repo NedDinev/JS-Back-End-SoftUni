@@ -21,6 +21,7 @@ router.post("/login", async (req, res) => {
       .render("auth/login", { error: getErrorMessage(error) });
   }
 });
+
 router.get("/register", (req, res) => {
   res.render("auth/register");
 });
@@ -38,7 +39,7 @@ router.post("/register", async (req, res) => {
     res.cookie("auth", token);
     res.redirect("/");
   } catch (error) {
-    res.status(400).render("auth/register", { error: getErrorMessage(error) });
+   return res.status(400).render("auth/register", { error: getErrorMessage(error) });
   }
 });
 

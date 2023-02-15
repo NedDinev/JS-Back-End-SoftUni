@@ -13,8 +13,6 @@ exports.authentication = async (req, res, next) => {
 
       res.locals.isAuthenticated = true; // to check if user is authenticated in handlebars template
       res.locals.user = decodedToken; // to use user data in handlebars template
-
-      console.log(req.user);
     } catch (error) {
       res.clearCookie("auth");
       return res.status(401).render("home/404");
