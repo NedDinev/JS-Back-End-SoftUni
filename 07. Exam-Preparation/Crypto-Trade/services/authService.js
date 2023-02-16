@@ -11,7 +11,7 @@ exports.register = async (username, email, password, repeatPassword) => {
   if (password !== repeatPassword) {
     throw new Error("Passwords do not match");
   }
-  //TODO: check if user exists already
+  //check if user exists already
   const existingUser = await this.findByUsername(username);
   const existingEmail = await this.findByEmail(email);
   if (existingUser) {
@@ -21,7 +21,10 @@ exports.register = async (username, email, password, repeatPassword) => {
     throw new Error("Email already exists");
   }
 
-  //TODO: validate password
+  //validate password
+  if (password.length > 4) {
+    throw new Error("Password is too short");
+  }
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
