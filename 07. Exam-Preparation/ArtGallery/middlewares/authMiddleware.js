@@ -24,7 +24,7 @@ exports.authentication = async (req, res, next) => {
 exports.isAuth = (req, res, next) => {
   //use it to check if user is authenticated for current route
   if (!req.user) {
-    return res.redirect("/");
+    return res.redirect("/login");
   }
   next();
 };

@@ -11,7 +11,6 @@ router.post("/create", isAuth, async (req, res) => {
   const { title, paintingTech, picture, certificate } = req.body;
 
   try {
-    console.log(title, paintingTech, picture, certificate, req.user._id);
     await publicationsService.create({
       title: title,
       paintingTech: paintingTech,
@@ -61,9 +60,15 @@ router.get("/:publicationId/edit", isAuth, async (req, res) => {
 router.post("/:publicationId/edit", isAuth, async (req, res) => {
   const publicationData = req.body;
   const publicationId = req.params.publicationId;
-  await publicationsService.edit(publicationId, publicationData);
 
-  res.redirect(`/publication/${publicationId}/details`);
+  try {
+    await publicationsService.edit(publicationId, publicationData);
+    res.redirect(`/publication/${publicationId}/details`);
+  } catch (error) {
+    return res
+      .status(400)
+      .render("publication/edit", { error: getErrorMessage(error) });
+  }
 });
 
 router.get("/:publicationId/share", isAuth, async (req, res) => {
